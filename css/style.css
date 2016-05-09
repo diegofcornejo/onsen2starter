@@ -1,0 +1,46 @@
+/**/
+
+.goFacebookButton {
+    width: 120px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    text-transform: capitalize;
+    font-size: 12px;
+}
+.tab-bar__label {
+    text-transform: capitalize !important;
+}
+.login {
+    background: url(../img/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.login .cover{
+    background: rgba(0, 0, 53, .6);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+}
+.login .container{
+    position: relative;
+    z-index: 99;
+    width: 50%;
+    left: 25%;
+    height: 50%;
+    top: 25%;
+}
+
+.login .container .loginButton{
+    width: 100%;
+    background: #9a0000;
+}
+.login .container .logo{
+    width: 100%;
+    height: auto;
+}

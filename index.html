@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="img-src *; default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>App Title</title>
+    <script src="components/loader.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/onsenui/js/onsenui.min.js"></script>
+    <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="lib/onsenui/css/app.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="lib/index.js"></script>
+</head>
+
+<body ng-controller="AppController as app">
+    <ons-navigator id="appNavigator" page="login.html"></ons-navigator>
+    <ons-template id="login.html">
+        <ons-page>
+            <div class="login">
+                <div class="cover"></div>
+                <div class="container">
+                    <img src="https://www.pentcloud.com/img/apps/core.png" class="logo" />
+                    <ons-button ng-click="app.login()" class="loginButton">Login</ons-button>
+                </div>
+            </div>
+        </ons-page>
+    </ons-template>
+    <!--==========HOME========-->
+    <ons-template id="home.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="center">{{app.title}}</div>
+                <div class="right" ng-click="app.logout()">
+                    <ons-toolbar-button>
+                        <ons-icon icon="fa-sign-out"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <ons-list>
+                <ons-list-item tappable ng-repeat="user in app.users" ng-click="app.goToPage(user)">
+                    <div class="list__item__left">
+                        <ons-icon icon="fa-trophy" class="list__item__icon"></ons-icon>
+                    </div>
+                    <div class="list__item__center">
+                        {{user.name}}
+                    </div>
+                    <div class="list__item__right">
+                        <ons-icon icon="ion-chevron-right" class="list__item__icon"></ons-icon>
+                    </div>
+                </ons-list-item>
+            </ons-list>
+        </ons-page>
+    </ons-template>
+    <!--===========/HOME=======-->
+
+    <ons-template id="page1.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button></ons-back-button>
+                </div>
+                <div class="center">{{app.setUser.name}}</div>
+                <div class="right" ng-click="app.logout()">
+                    <ons-toolbar-button>
+                        <ons-icon icon="fa-sign-out"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+            </ons-toolbar>
+            <ons-tabbar position="top">
+                <ons-tab class="capitalize" page="page2.html" label="Tab 1" icon="ion-android-calendar" active="true"></ons-tab>
+                <ons-tab class="capitalize" page="page3.html" label="Tab 2" icon="ion-ios-list"></ons-tab>
+                <ons-tab class="capitalize" page="page4.html" label="Tab 3" icon="ion-android-list"></ons-tab>
+            </ons-tabbar>
+            <section style="margin: 10px;">
+                <p>What is your name?</p>
+                <p>
+                    <ons-input modifier="underbar" ng-model="app.name" placeholder="Your name" float></ons-input>
+                </p>
+                <p>
+                    Hello, {{ app.name || 'stranger' }}!
+                </p>
+                <ons-button ripple>
+                    Tap Me
+                </ons-button>
+            </section>
+        </ons-page>
+    </ons-template>
+    <ons-template id="page2.html">
+        <ons-page>
+            <ons-speed-dial position="right bottom">
+                <ons-fab>
+                    <ons-icon icon="fa-facebook"></ons-icon>
+                </ons-fab>
+                <ons-speed-dial-item class="goFacebookButton">Link 1</ons-speed-dial-item>
+                <ons-speed-dial-item class="goFacebookButton">Link 2</ons-speed-dial-item>
+                <ons-speed-dial-item><ons-icon icon="fa-angle-left"></ons-icon></ons-speed-dial-item>
+            </ons-speed-dial>
+        </ons-page>
+    </ons-template>
+    <ons-template id="page3.html">
+        <ons-page>
+            <ons-speed-dial position="right bottom">
+                <ons-fab>
+                    <ons-icon icon="fa-facebook"></ons-icon>
+                </ons-fab>
+                <ons-speed-dial-item class="goFacebookButton">Link 1</ons-speed-dial-item>
+                <ons-speed-dial-item class="goFacebookButton">Link 2</ons-speed-dial-item>
+                <ons-speed-dial-item ><ons-icon icon="fa-angle-left"></ons-icon></ons-speed-dial-item>
+            </ons-speed-dial>
+        </ons-page>
+    </ons-template>
+    <ons-template id="page4.html">
+        <ons-page>
+            <section style="margin: 10px;">
+                <p>What is your name?</p>
+                <p>
+                    <ons-input modifier="underbar" ng-model="person.name" placeholder="Your name" float></ons-input>
+                </p>
+                <p>
+                    Hello, {{ person.name || 'stranger' }}!
+                </p>
+                <ons-fab position="bottom right" ripple>
+                    <ons-icon icon="fa-angle-left"></ons-icon>
+                </ons-fab>
+            </section>
+        </ons-page>
+    </ons-template>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>
